@@ -65,33 +65,33 @@
     'use strict';
 
     // mean and deviation for time interval
-    var meanMs = 1000, // milliseconds
+    let meanMs = 1000, // milliseconds
         dev = 150;
 
     // define time scale
-    var timeScale = d3.scale.linear()
+    let timeScale = d3.scale.linear()
         .domain([300, 1700])
         .range([300, 1700])
         .clamp(true);
 
     // define value scale
-    var valueScale = d3.scale.linear()
+    let valueScale = d3.scale.linear()
         .domain([0, 1])
         .range([30, 95]);
 
     // generate initial data
-    var normal = d3.random.normal(1000, 150);
-    var currMs = new Date().getTime();
-    var data = d3.range(300).map(function(d, i, arr) {
-        var value = valueScale(Math.random()); // random data
-        var interval = Math.round(timeScale(normal()));
+    let normal = d3.random.normal(1000, 150);
+    let currMs = new Date().getTime();
+    let data = d3.range(300).map(function(d, i, arr) {
+        let value = valueScale(Math.random()); // random data
+        let interval = Math.round(timeScale(normal()));
         currMs += interval;
-        var time = new Date(currMs);
-        var obj = { interval: interval, value: value, time: time, ts: currMs };
+        let time = new Date(currMs);
+        let obj = { interval: interval, value: value, time: time, ts: currMs };
         return obj;
     });
     d3.csv("../pivo_500ms_packet_drops.csv", function(error, data) {
-        var chart = datarealTimeChart()
+        let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
             .xTitle("time")
@@ -101,22 +101,22 @@
             .initialData([]);
 
         // invoke the chart
-        var chartDiv = d3.select("#viewDiv").append("div")
+        let chartDiv = d3.select("#viewDiv").append("div")
             .attr("id", "chartDiv")
             .call(chart);
 
 
         // drive data into the chart roughly every second
         // in a normal use case, real time data would arrive through the network or some other mechanism
-        var d = 0;
+        let d = 0;
         function dataGenerator() {
-            var timeout = 20;
+            let timeout = 20;
 
             setTimeout(function () {
 
                 // create new data item
-                var now = new Date();
-                var obj = {
+                let now = new Date();
+                let obj = {
                     value: data[d].value, // random data
                     time: now,
                     color: "red",
@@ -140,7 +140,7 @@
         dataGenerator();
     });
     d3.csv("../sin.csv", function(error, data) {
-        var chart = datarealTimeChart()
+        let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
             .xTitle("time")
@@ -150,22 +150,22 @@
             .initialData([]);
 
         // invoke the chart
-        var chartDiv = d3.select("#viewDiv").append("div")
+        let chartDiv = d3.select("#viewDiv").append("div")
             .attr("id", "chartDiv")
             .call(chart);
 
 
         // drive data into the chart roughly every second
         // in a normal use case, real time data would arrive through the network or some other mechanism
-        var d = 0;
+        let d = 0;
         function dataGenerator() {
-            var timeout = 20;
+            let timeout = 20;
 
             setTimeout(function () {
 
                 // create new data item
-                var now = new Date();
-                var obj = {
+                let now = new Date();
+                let obj = {
                     value: data[d].value, // random data
                     time: now,
                     color: "red",
@@ -189,7 +189,7 @@
         dataGenerator();
     });
     d3.csv("../pivo_500ms_simulation_speed_test.csv", function(error, data) {
-        var chart = datarealTimeChart()
+        let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
             .xTitle("time")
@@ -199,28 +199,28 @@
             .initialData([]);
 
         // invoke the chart
-        var chartDiv = d3.select("#viewDiv").append("div")
+        let chartDiv = d3.select("#viewDiv").append("div")
             .attr("id", "chartDiv")
             .call(chart);
 
 
         // drive data into the chart roughly every second
         // in a normal use case, real time data would arrive through the network or some other mechanism
-        var d = 0;
+        let d = 0;
         function dataGenerator() {
-            var timeout = 20;
+            let timeout = 20;
 
             setTimeout(function () {
 
                 // create new data item
-                var now = new Date();
-                var obj = {
+                let now = new Date();
+                let obj = {
                     value: data[d].value, // random data
                     time: now,
                     color: "red",
                     ts: now.getTime(),
                     interval: timeout
-                }
+                };
 
                 d++;
 
