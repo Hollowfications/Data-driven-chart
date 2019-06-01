@@ -143,7 +143,7 @@ function datarealTimeChart() {
         nav.append("rect")
             .attr("x", 0)
             .attr("y", 0)
-            .attr("width", width)
+            .attr("width", 920)
             .attr("height", heightNav)
             .style("fill", "#F5F5F5")
             .style("shape-rendering", "crispEdges")
