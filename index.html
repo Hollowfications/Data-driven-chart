@@ -87,7 +87,7 @@
         let obj = { interval: interval, value: value, time: time, ts: currMs };
         return obj;
     });
-    d3.csv("/https://github.com/Hollowfications/Data-driven-chart/pivo_500ms_packet_drops.csv", function(error, data) {
+    d3.csv("../Data-driven-chart/pivo_500ms_packet_drops.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
@@ -136,7 +136,7 @@
         // start the data generator
         dataGenerator();
     });
-    d3.csv("/https://github.com/Hollowfications/Data-driven-chart/sin.csv", function(error, data) {
+    d3.csv("../Data-driven-chart/sin.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
@@ -185,7 +185,7 @@
         // start the data generator
         dataGenerator();
     });
-    d3.csv("/https://github.com/Hollowfications/Data-driven-chart/pivo_500ms_simulation_speed_test.csv", function(error, data) {
+    d3.csv("../Data-driven-chart/pivo_500ms_simulation_speed_test.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
