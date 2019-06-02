@@ -6,7 +6,7 @@ function datarealTimeChart() {
         maxSeconds = 100, pixelsPerSecond = 10,
         svgWidth = 1000, svgHeight = 200,
         margin = { top: 20, bottom: 20, left: 50, right: 30, topNav: 10, bottomNav: 20 },
-        dimension = { chartTitle: 10, xAxis: 20, yAxis: 20, xTitle: 10, yTitle: 10, navChart: 50 },
+        dimension = { xAxis: 20, yAxis: 20, xTitle: 10, yTitle: 10, navChart: 50 },
         barWidth = 8,
         maxY = 100, minY = 0,
         chartTitle, yTitle, xTitle,
@@ -24,12 +24,10 @@ function datarealTimeChart() {
         }
 
         // process titles
-        chartTitle = chartTitle || "";
         xTitle = xTitle || "";
         yTitle = yTitle || "";
 
         // compute component dimensions
-        let chartTitleDim = chartTitle == "" ? 0 : dimension.chartTitle;
         let xTitleDim = xTitle == "" ? 0 : dimension.xTitle;
         let yTitleDim = yTitle == "" ? 0 : dimension.yTitle;
         let xAxisDim = !drawXAxis ? 0 : dimension.xAxis;
@@ -38,9 +36,9 @@ function datarealTimeChart() {
 
         // compute chart dimension and offset
         let marginTop = margin.top + chartTitleDim;
-        let height = svgHeight - marginTop - margin.bottom - chartTitleDim - xTitleDim - xAxisDim - navChartDim + 30;
+        let height = svgHeight - marginTop - margin.bottom - xTitleDim - xAxisDim - navChartDim + 30;
         let heightNav = navChartDim - margin.topNav - margin.bottomNav;
-        let marginTopNav = svgHeight  - heightNav - margin.topNav - chartTitleDim - margin.bottom;
+        let marginTopNav = svgHeight  - heightNav - margin.topNav - margin.bottom;
         let width = svgWidth - margin.left - margin.right;
         let widthNav = width;
 
@@ -113,17 +111,6 @@ function datarealTimeChart() {
             .attr("dy", ".71em")
             .text(function(d) {
                 let text = yTitle == undefined ? "" : yTitle;
-                return text;
-            });
-
-        // in main group, add chart title
-        main.append("text")
-            .attr("class", "chartTitle")
-            .attr("x", width / 2)
-            .attr("y", -20)
-            .attr("dy", ".71em")
-            .text(function(d) {
-                let text = chartTitle == undefined ? "" : chartTitle;
                 return text;
             });
 
@@ -385,13 +372,6 @@ function datarealTimeChart() {
     chart.border = function(_) {
         if (arguments.length == 0) return border;
         border = _;
-        return chart;
-    };
-
-    // chart title
-    chart.title = function(_) {
-        if (arguments.length == 0) return chartTitle;
-        chartTitle = _;
         return chart;
     };
 
