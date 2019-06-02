@@ -367,13 +367,6 @@ function datarealTimeChart() {
         return chart;
     };
 
-    // x axis title
-    chart.xTitle = function(_) {
-        if (arguments.length == 0) return xTitle;
-        xTitle = _;
-        return chart;
-    };
-
     // y axis title
     chart.yTitle = function(_) {
         if (arguments.length == 0) return yTitle;
