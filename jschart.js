@@ -6,7 +6,7 @@ function datarealTimeChart() {
         maxSeconds = 100, pixelsPerSecond = 10,
         svgWidth = 1000, svgHeight = 200,
         margin = { top: 20, bottom: 20, left: 50, right: 30, topNav: 10, bottomNav: 20 },
-        dimension = { xAxis: 20, yAxis: 20, yTitle: 10, navChart: 50 },
+        dimension = { chartTitle: 10, xAxis: 20, yAxis: 20, xTitle: 10, yTitle: 10, navChart: 50 },
         barWidth = 8,
         maxY = 100, minY = 0,
         chartTitle, yTitle, xTitle,
@@ -24,19 +24,23 @@ function datarealTimeChart() {
         }
 
         // process titles
+        chartTitle = chartTitle || "";
+        xTitle = xTitle || "";
         yTitle = yTitle || "";
 
         // compute component dimensions
+        let chartTitleDim = chartTitle == "" ? 0 : dimension.chartTitle;
+        let xTitleDim = xTitle == "" ? 0 : dimension.xTitle;
         let yTitleDim = yTitle == "" ? 0 : dimension.yTitle;
         let xAxisDim = !drawXAxis ? 0 : dimension.xAxis;
         let yAxisDim = !drawYAxis ? 0 : dimension.yAxis;
         let navChartDim = !drawNavChart ? 0 : dimension.navChart;
 
         // compute chart dimension and offset
-        let marginTop = margin.top;
-        let height = svgHeight - marginTop - margin.bottom - xAxisDim - navChartDim + 30;
+        let marginTop = margin.top + chartTitleDim;
+        let height = svgHeight - marginTop - margin.bottom - chartTitleDim - xTitleDim - xAxisDim - navChartDim + 30;
         let heightNav = navChartDim - margin.topNav - margin.bottomNav;
-        let marginTopNav = svgHeight  - heightNav - margin.topNav - margin.bottom;
+        let marginTopNav = svgHeight  - heightNav - margin.topNav - chartTitleDim - margin.bottom;
         let width = svgWidth - margin.left - margin.right;
         let widthNav = width;
 
@@ -95,7 +99,10 @@ function datarealTimeChart() {
             .attr("x", width / 2)
             .attr("y", 25)
             .attr("dy", ".71em")
-
+            .text(function(d) {
+                let text = xTitle == undefined ? "" : xTitle;
+                return text;
+            });
 
         // in y axis group, add y axis title
         yAxisG.append("text")
@@ -106,6 +113,17 @@ function datarealTimeChart() {
             .attr("dy", ".71em")
             .text(function(d) {
                 let text = yTitle == undefined ? "" : yTitle;
+                return text;
+            });
+
+        // in main group, add chart title
+        main.append("text")
+            .attr("class", "chartTitle")
+            .attr("x", width / 2)
+            .attr("y", -20)
+            .attr("dy", ".71em")
+            .text(function(d) {
+                let text = chartTitle == undefined ? "" : chartTitle;
                 return text;
             });
 
@@ -147,11 +165,14 @@ function datarealTimeChart() {
         // define nav axis
         let xAxisNav = d3.svg.axis().orient("bottom");
 
+
         // define function that will draw the nav area chart
         let navArea = d3.svg.area()
             .x(function (d) { return xNav(d.time); })
             .y1(function (d) { return yNav(d.value); })
             .y0(heightNav);
+
+
 
         // define function that will draw the nav line chart
         let navLine = d3.svg.line()
@@ -364,6 +385,20 @@ function datarealTimeChart() {
     chart.border = function(_) {
         if (arguments.length == 0) return border;
         border = _;
+        return chart;
+    };
+
+    // chart title
+    chart.title = function(_) {
+        if (arguments.length == 0) return chartTitle;
+        chartTitle = _;
+        return chart;
+    };
+
+    // x axis title
+    chart.xTitle = function(_) {
+        if (arguments.length == 0) return xTitle;
+        xTitle = _;
         return chart;
     };
 
