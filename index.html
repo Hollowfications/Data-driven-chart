@@ -131,6 +131,7 @@
         // start the data generator
         dataGenerator();
     });
+
     d3.csv("sin.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
@@ -175,7 +176,6 @@
 
             }, timeout);
         }
-
 
         // start the data generator
         dataGenerator();
