@@ -10,11 +10,6 @@
             .axis text {
                 font: 10px sans-serif;
             }
-            .chartTitle {
-                font-size: 12px;
-                font-weight: bold;
-                text-anchor: middle;
-            }
             .axis .title {
                 font-weight: bold;
                 text-anchor: middle;
@@ -87,7 +82,7 @@
         let obj = { interval: interval, value: value, time: time, ts: currMs };
         return obj;
     });
-    d3.csv("../pivo_500ms_packet_drops.csv", function(error, data) {
+    d3.csv("pivo_500ms_packet_drops.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
@@ -136,7 +131,7 @@
         // start the data generator
         dataGenerator();
     });
-    d3.csv("../sin.csv", function(error, data) {
+    d3.csv("sin.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
@@ -185,7 +180,7 @@
         // start the data generator
         dataGenerator();
     });
-    d3.csv("../pivo_500ms_simulation_speed_test.csv", function(error, data) {
+    d3.csv("pivo_500ms_simulation_speed_test.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
             .yTitle("data")
