@@ -5,7 +5,7 @@ function datarealTimeChart() {
         datum, initialData, data,
         maxSeconds = 100, pixelsPerSecond = 10,
         svgWidth = 1000, svgHeight = 200,
-        margin = { top: 20, bottom: 20, left: 50, right: 30, topNav: 10, bottomNav: 20 },
+        margin = { top: 20, bottom: 10, left: 50, right: 30, topNav: 10, bottomNav: 10 },
         dimension = { chartTitle: 10, xAxis: 20, yAxis: 20, xTitle: 10, yTitle: 10, navChart: 50 },
         barWidth = 8,
         maxY = 100, minY = 0,
@@ -29,20 +29,20 @@ function datarealTimeChart() {
         yTitle = yTitle || "";
 
         // compute component dimensions
-        let chartTitleDim = chartTitle == "" ? 0 : dimension.chartTitle;
-        let xTitleDim = xTitle == "" ? 0 : dimension.xTitle;
-        let yTitleDim = yTitle == "" ? 0 : dimension.yTitle;
-        let xAxisDim = !drawXAxis ? 0 : dimension.xAxis;
-        let yAxisDim = !drawYAxis ? 0 : dimension.yAxis;
-        let navChartDim = !drawNavChart ? 0 : dimension.navChart;
+        var chartTitleDim = chartTitle == "" ? 0 : dimension.chartTitle,
+            xTitleDim = xTitle == "" ? 0 : dimension.xTitle,
+            yTitleDim = yTitle == "" ? 0 : dimension.yTitle,
+            xAxisDim = !drawXAxis ? 0 : dimension.xAxis,
+            yAxisDim = !drawYAxis ? 0 : dimension.yAxis,
+            navChartDim = !drawNavChart ? 0 : dimension.navChart;
 
-        // compute chart dimension and offset
-        let marginTop = margin.top + chartTitleDim;
-        let height = svgHeight - marginTop - margin.bottom - chartTitleDim - xTitleDim - xAxisDim - navChartDim + 30;
-        let heightNav = navChartDim - margin.topNav - margin.bottomNav;
-        let marginTopNav = svgHeight  - heightNav - margin.topNav - chartTitleDim - margin.bottom;
-        let width = svgWidth - margin.left - margin.right;
-        let widthNav = width;
+        // compute dimension of main and nav charts, and offsets
+        let marginTop = margin.top + chartTitleDim,
+            height = svgHeight - marginTop - margin.bottom - chartTitleDim - xTitleDim - xAxisDim - navChartDim + 30,
+            heightNav = navChartDim - margin.topNav - margin.bottomNav,
+            marginTopNav = svgHeight - margin.bottom - heightNav - margin.topNav,
+            width = svgWidth - margin.left - margin.right,
+            widthNav = width;
 
         // append the svg
         let svg = selection.append("svg")
@@ -64,14 +64,14 @@ function datarealTimeChart() {
             .attr("x", 0)
             .attr("y", 0)
             .attr("width", 920)
-            .attr("height", 110);
+            .attr("height", 100);
 
         // create chart background
         main.append("rect")
             .attr("x", 0)
             .attr("y", 0)
             .attr("width", 920)
-            .attr("height", 110)
+            .attr("height", 100)
             .style("fill", "#f5f5f5");
 
         // note that two groups are created here, the latter assigned to barG;
@@ -119,7 +119,7 @@ function datarealTimeChart() {
         // in main group, add chart title
         main.append("text")
             .attr("class", "chartTitle")
-            .attr("x", width / 2)
+            .attr("x", 20)
             .attr("y", -20)
             .attr("dy", ".71em")
             .text(function(d) {
