@@ -1,7 +1,7 @@
 'use strict';
 function datarealTimeChart() {
 
-    let version = "0.1.0",
+    var version = "0.1.0",
         datum, initialData, data,
         maxSeconds = 100, pixelsPerSecond = 10,
         svgWidth = 1000, svgHeight = 200,
@@ -18,7 +18,7 @@ function datarealTimeChart() {
     // create the chart
     let chart = function(s) {
         selection = s;
-        if (selection == undefined) {
+        if (selection === undefined) {
             console.error("selection is undefined");
             return;
         }
@@ -29,9 +29,9 @@ function datarealTimeChart() {
         yTitle = yTitle || "";
 
         // compute component dimensions
-        var chartTitleDim = chartTitle == "" ? 0 : dimension.chartTitle,
-            xTitleDim = xTitle == "" ? 0 : dimension.xTitle,
-            yTitleDim = yTitle == "" ? 0 : dimension.yTitle,
+        let chartTitleDim = chartTitle === "" ? 0 : dimension.chartTitle,
+            xTitleDim = xTitle === "" ? 0 : dimension.xTitle,
+            yTitleDim = yTitle === "" ? 0 : dimension.yTitle,
             xAxisDim = !drawXAxis ? 0 : dimension.xAxis,
             yAxisDim = !drawYAxis ? 0 : dimension.yAxis,
             navChartDim = !drawNavChart ? 0 : dimension.navChart;
@@ -100,7 +100,7 @@ function datarealTimeChart() {
             .attr("y", 25)
             .attr("dy", ".71em")
             .text(function(d) {
-                let text = xTitle == undefined ? "" : xTitle;
+                let text = xTitle === undefined ? "" : xTitle;
                 return text;
             });
 
@@ -112,7 +112,7 @@ function datarealTimeChart() {
             .attr("y", -35)
             .attr("dy", ".71em")
             .text(function(d) {
-                let text = yTitle == undefined ? "" : yTitle;
+                let text = yTitle === undefined ? "" : yTitle;
                 return text;
             });
 
@@ -123,7 +123,7 @@ function datarealTimeChart() {
             .attr("y", -20)
             .attr("dy", ".71em")
             .text(function(d) {
-                let text = chartTitle == undefined ? "" : chartTitle;
+                let text = chartTitle === undefined ? "" : chartTitle;
                 return text;
             });
 
@@ -160,7 +160,7 @@ function datarealTimeChart() {
 
         // define nav scales
         let xNav = d3.time.scale().range([0, 920]);
-        let yNav = d3.scale.linear().domain([minY, maxY]).range([heightNav - 5, 0]);
+        let yNav = d3.scale.linear().domain([minY, maxY]).range([heightNav - 3, 0]);
 
         // define nav axis
         let xAxisNav = d3.svg.axis().orient("bottom");
@@ -219,7 +219,7 @@ function datarealTimeChart() {
                 offsetViewport = startTimeViewport.getTime() - startTime.getTime();
 
                 // handle invisible viewport
-                if (intervalViewport == 0) {
+                if (intervalViewport === 0) {
                     intervalViewport = maxSeconds * 1000;
                     offsetViewport = 0;
                 }
@@ -353,7 +353,7 @@ function datarealTimeChart() {
 
     // array of initial data
     chart.initialData = function(_) {
-        if (arguments.length == 0) return initialData;
+        if (arguments.length === 0) return initialData;
         initialData = _;
         return chart;
     };
@@ -361,7 +361,7 @@ function datarealTimeChart() {
     // new data item (this most recent item will appear
     // on the right side of the chart, and begin moving left)
     chart.datum = function(_) {
-        if (arguments.length == 0) return datum;
+        if (arguments.length === 0) return datum;
         datum = _;
         data.push(datum);
         return chart;
@@ -369,49 +369,49 @@ function datarealTimeChart() {
 
     // svg width
     chart.width = function(_) {
-        if (arguments.length == 0) return svgWidth;
+        if (arguments.length === 0) return svgWidth;
         svgWidth = _;
         return chart;
     };
 
     // svg height
     chart.height = function(_) {
-        if (arguments.length == 0) return svgHeight;
+        if (arguments.length === 0) return svgHeight;
         svgHeight = _;
         return chart;
     };
 
     // svg border
     chart.border = function(_) {
-        if (arguments.length == 0) return border;
+        if (arguments.length === 0) return border;
         border = _;
         return chart;
     };
 
     // chart title
     chart.title = function(_) {
-        if (arguments.length == 0) return chartTitle;
+        if (arguments.length === 0) return chartTitle;
         chartTitle = _;
         return chart;
     };
 
     // x axis title
     chart.xTitle = function(_) {
-        if (arguments.length == 0) return xTitle;
+        if (arguments.length === 0) return xTitle;
         xTitle = _;
         return chart;
     };
 
     // y axis title
     chart.yTitle = function(_) {
-        if (arguments.length == 0) return yTitle;
+        if (arguments.length === 0) return yTitle;
         yTitle = _;
         return chart;
     };
 
     // bar width
     chart.barWidth = function(_) {
-        if (arguments.length == 0) return barWidth;
+        if (arguments.length === 0) return barWidth;
         barWidth = _;
         return chart;
     };

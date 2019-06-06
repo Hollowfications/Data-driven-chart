@@ -76,17 +76,6 @@
         .domain([0, 1])
         .range([30, 95]);
 
-    // generate initial data
-    let normal = d3.random.normal(1000, 150);
-    let currMs = new Date().getTime();
-    let data = d3.range(300).map(function(d, i, arr) {
-        let value = valueScale(Math.random()); // random data
-        let interval = Math.round(timeScale(normal()));
-        currMs += interval;
-        let time = new Date(currMs);
-        let obj = { interval: interval, value: value, time: time, ts: currMs };
-        return obj;
-    });
     d3.csv("pivo_500ms_packet_drops.csv", function(error, data) {
         let chart = datarealTimeChart()
             .border(true)
@@ -117,7 +106,6 @@
                 let obj = {
                     value: data[d].value, // random data
                     time: now,
-                    color: "red",
                     ts: now.getTime(),
                     interval: timeout
                 };
@@ -168,7 +156,6 @@
                 let obj = {
                     value: data[d].value, // random data
                     time: now,
-                    color: "red",
                     ts: now.getTime(),
                     interval: timeout
                 };
@@ -217,7 +204,6 @@
                 let obj = {
                     value: data[d].value, // random data
                     time: now,
-                    color: "red",
                     ts: now.getTime(),
                     interval: timeout
                 };
